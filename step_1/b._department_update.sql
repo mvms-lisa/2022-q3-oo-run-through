@@ -70,3 +70,19 @@ update powr_viewership p
     ) q
     -- update where the record id matches the record id in query
     where p.id = q.qid
+
+-- Update Department on Revenue
+update revenue
+    -- set device id column to val in query, set dept id to val in query
+    set r.department = q.name
+    from 
+    (
+        -- query to match viewership record to the device
+        select r.id as qid, d.id as depid, d.name as name  from revenue r
+        join dictionary.public.departments d on (d.id = r.department_id)
+        where year = 2022 and quarter = 'q3'
+    ) q
+    -- update where the record id matches the record id in query
+    where r.id = q.qid
+    
+    select * from dictionary.public.departments
