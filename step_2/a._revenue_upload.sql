@@ -25,3 +25,15 @@
     from spotx where year = 2022 and quarter = 'q3' and deal_name like '%9 Media%'
     group by channel_name, year_month_day, quarter, year, department_id, month
     order by channel_name
+
+    -- Ampliffy
+    insert into revenue(amount, month, quarter, year, filename, pay_partner, year_month_day, department, title, type, description, label, viewership_type )
+    values
+    (115.98, 9, 'q3', 2022, 'Manual Insert', 'ampliffy', 20220901, 'Roku', 'Ampliffy', 'Roku Revenue', 'Nosey: September 2022 Invoice', 'Revenue', 'VOD')
+
+    -- Vizio
+    insert into revenue(amount, month, quarter, year, filename, pay_partner, year_month_day, department, title, type, description, label, viewership_type )
+    values
+    (4161.10, 7, 'q3', 2022, 'Manual Insert', 'vizio', 20220701, 'Vizio', 'Vizio', 'Vizio Revenue', 'Standalone App', 'Revenue', 'VOD'),
+    (3950.96, 8, 'q3', 2022, 'Manual Insert', 'vizio', 20220801, 'Vizio', 'Vizio', 'Vizio Revenue', 'Standalone App', 'Revenue', 'VOD'),
+    (3981.31, 9, 'q3', 2022, 'Manual Insert', 'vizio', 20220901, 'Vizio', 'Vizio', 'Vizio Revenue', 'Standalone App', 'Revenue', 'VOD')
