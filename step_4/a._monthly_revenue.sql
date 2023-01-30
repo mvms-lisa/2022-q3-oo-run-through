@@ -73,6 +73,7 @@ where pay_partner = 'magnite' and year = 2022 and quarter = 'q3'
 
 
 -- video bridge (NEED TO FIGURE OUT SPLIT)
+    -- I ended up manually entering this for q3. Need to figure out split for q4.
     -- roku
     insert into monthly_revenue(tot_revenue, year_month_day, department_id, partner, year, quarter, month, description, title, type)
     select amount, year_month_day, 5, 'videobridge', year, quarter, month, description, title, type  from revenue
@@ -82,23 +83,6 @@ where pay_partner = 'magnite' and year = 2022 and quarter = 'q3'
     insert into monthly_revenue(tot_revenue, year_month_day, department_id, partner, year, quarter, month, description, title, type)
     select amount, year_month_day, 2, 'videobridge', year, quarter, month, description, title, type from revenue
     where pay_partner like '%videobridge - firetv%' and year = 2022 and quarter = 'q3'
-
-
-  -- verizon
-    -- roku (Updated 9/8/22)
-    insert into monthly_revenue(tot_revenue, year_month_day, department_id, partner, year, month, quarter, description, type, title)
-    select sum(verizon_revenue), year_month_day, v.department_id, 'verizon - roku', year, month, quarter, marketplace, 'Roku Revenue' as type, 'Verizon Media' as title  from verizon v
-    join dictionary.public.departments nd on (nd.id = v.department_id)
-    where year = 2022 and quarter = 'q3' and v.department_id = 5
-    group by YEAR_MONTH_DAY, v.department_id, year, month, quarter, marketplace
-
-
-    -- firetv (Updated 9/8/22)
-    insert into monthly_revenue(tot_revenue, year_month_day, department_id, partner, year, month, quarter, description, type, title)
-    select sum(verizon_revenue), year_month_day, v.department_id, 'verizon - firetv', year, month, quarter, marketplace, 'FireTV Revenue' as type, 'Verizon Media' as title from verizon v
-    join dictionary.public.departments nd on (nd.id = v.department_id)
-    where year = 2022 and quarter = 'q3' and v.department_id != 5
-    group by YEAR_MONTH_DAY, v.department_id, year, month, quarter, marketplace
 
 
 
@@ -182,3 +166,13 @@ select * from spotx where year = 2022 and quarter = 'q3' and deal_name like '%Vi
         where s.year = 2022 and s.quarter = 'q3'
       )  q
       where s.id = q.sid
+
+-- Ampliffy
+insert into monthly_revenue(tot_revenue, year_month_day, department_id, partner, year, quarter, month, description, title, type, viewership_type)
+select amount, year_month_day, 5, 'ampliffy', year, quarter, month, description, title, type, 'VOD' as viewership_type from revenue 
+where pay_partner = 'ampliffy' and year = 2022 and quarter = 'q3'
+
+-- Vizio
+insert into monthly_revenue(tot_revenue, year_month_day, partner, year, quarter, month, description, title, type, viewership_type)
+select amount, year_month_day, 'vizio', year, quarter, month, description, title, type, 'VOD' as viewership_type from revenue 
+where pay_partner = 'vizio' and year = 2022 and quarter = 'q3'
